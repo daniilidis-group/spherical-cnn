@@ -1,0 +1,10 @@
+--dset
+from_cached_tfrecords
+--n_classes
+40
+--input_res
+64
+--dtype
+complex64
+--mag_ang
+--real_inputs

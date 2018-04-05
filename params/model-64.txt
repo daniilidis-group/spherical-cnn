@@ -1,0 +1,17 @@
+--model=two_branch
+--nonlin
+prelu
+--batch_norm
+--extra_loss
+--weighted_sph_avg
+--n_filter_params
+8
+--nfilters
+16,16,32,32,64,64,128,128
+--pool_layers
+0,0,1,0,1,0,1,0
+--concat_branches
+0,0,1,0,1,0,1,0
+--no_final_fc
+--transform_method
+naive

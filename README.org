@@ -1,0 +1,101 @@
+#+TITLE: Learning SO(3) Equivariant Representations with Spherical CNNs
+
+* Abstract
+
+We address the problem of 3D rotation equivariance in convolutional
+neural networks. 3D rotations have been a challenging nuisance in 3D
+classification tasks requiring higher capacity and extended data
+augmentation in order to tackle it. We model 3D data with
+multi-valued spherical functions and we propose a novel spherical
+convolutional network that implements exact convolutions on the sphere
+by realizing them in the spherical harmonic domain. Resulting filters
+have local symmetry and are localized by enforcing smooth spectra. We
+apply a novel pooling on the spectral domain and our operations are
+independent of the underlying spherical resolution throughout the
+network. We show that networks with much lower capacity and without
+requiring data augmentation can exhibit performance comparable to the
+state of the art in standard retrieval and classification benchmarks.
+
+* Demo
+
+  This repository contains a demo, where we train and test the model on the SO(3)-rotated ModelNet40 dataset.
+
+Check the requirements in requirements.txt
+
+The following commands should
+
+- download the dataset (16 Gb) to ~/data/m40-so3-64
+- create a virtualenv,
+- install the requirements,
+- train and test the model.
+
+#+BEGIN_SRC sh
+wget -c -P ~/data/m40-so3-64 http://visiondata.cis.upenn.edu/sphcnn/m40-so3-64/{train{0..48},test0,val0}.tfrecord
+
+virtualenv -p python3 env
+source env/bin/activate
+pip install -r requirements.txt
+TF_CPP_MIN_LOG_LEVEL=1 python3 scripts/train.py \
+                               @params/model-64.txt \
+                               @params/m40-64.txt \
+                               @params/training.txt \
+                               --dset_dir ~/data/m40-so3-64 \
+                               --logdir /tmp/m40-so3 \
+                               --run_id m40-so3
+#+END_SRC
+
+Sample output:
+
+#+BEGIN_EXAMPLE
+Running on m40-so3
+Namespace(...)
+Loading dataset from from_cached_tfrecords...
+Loading model two_branch. Logdir /tmp/m40-so3
+Start training...
+epoch=1; lr=0.0010 train: 0.2618, valid: 0.2618
+epoch=2; lr=0.0010 train: 0.4958, valid: 0.4958
+epoch=3; lr=0.0010 train: 0.6473, valid: 0.6473
+(...)
+epoch=46; lr=0.0000 train: 0.9657, valid: 0.9657
+epoch=47; lr=0.0000 train: 0.9635, valid: 0.9635
+epoch=48; lr=0.0000 train: 0.9639, valid: 0.9639
+Start testing...
+| model   |  train |    val |   test | train time |
+| m40-so3 | 0.9639 | 0.9639 | 0.8683 |     237.04 |
+#+END_EXAMPLE
+
+This reproduces the SO(3)/SO(3) result in table 1 (86.9%) of the paper.
+It runs in about 3h on a Nvidia GeForce GTX 1080 Ti, and requires ~10 Gb of GPU memory.
+
+Use =--train_bsize= to reduce the batch size if you have less memory available.
+
+Change =--dset_dir= if you saved the dataset elsewhere.
+
+Call =pytest= to run the unit tests.
+
+* References
+
+Esteves, C., Allen-Blanchette, C., Makadia, A., & Daniilidis,
+K. (2017). Learning SO(3) Equivariant Representations with Spherical
+CNNs. http://arxiv.org/abs/1711.06721v2
+
+#+BEGIN_SRC bibtex
+@article{esteves17_learn_so_equiv_repres_with_spher_cnns,
+  author = {Esteves, Carlos and Allen-Blanchette, Christine and Makadia, Ameesh and Daniilidis, Kostas},
+  title = {Learning SO(3) Equivariant Representations With Spherical Cnns},
+  journal = {CoRR},
+  year = {2017},
+  url = {http://arxiv.org/abs/1711.06721v2},
+  archivePrefix = {arXiv},
+  eprint = {1711.06721v2},
+  primaryClass = {cs.CV},
+}
+#+END_SRC
+
+* Authors
+
+[[http://machc.github.io][Carlos Esteves]] [1], [[http://www.seas.upenn.edu/~allec/][Christine Allen-Blanchette]] [1], [[http://www.ameeshmakadia.com][Ameesh Makadia]] [2], [[http://www.cis.upenn.edu/~kostas/][Kostas Daniilidis]] [1]
+
+[1] [[http://grasp.upenn.edu][GRASP Laboratory]], [[http://www.upenn.edu][University of Pennsylvania]]
+
+[2] [[http://research.google.com][Google]]

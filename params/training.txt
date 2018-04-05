@@ -1,0 +1,5 @@
+--n_epochs=48
+--learning_rate
+{0: 0.001, 32: 0.0002, 40: 0.00004}
+--train_bsize=16
+--skip_val
