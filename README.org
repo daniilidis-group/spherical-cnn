@@ -22,15 +22,21 @@ state of the art in standard retrieval and classification benchmarks.
 
 Check the requirements in requirements.txt
 
+Download the dataset [[https://drive.google.com/file/d/1_yJCn0lWkb8gvaHxwTTkGlLVT8dKR0Hc/view?usp=sharing][here]] (7.0Gb).
+
 The following commands should
 
-- download the dataset (16 Gb) to ~/data/m40-so3-64
+- uncompress the downloaded dataset from /tmp to ~/data/m40-so3-64,
+- clone this repo,
 - create a virtualenv,
 - install the requirements,
 - train and test the model.
 
 #+BEGIN_SRC sh
-wget -c -P ~/data/m40-so3-64 http://visiondata.cis.upenn.edu/sphcnn/m40-so3-64/{train{0..48},test0,val0}.tfrecord
+mkdir -p ~/data/m40-so3-64 && tar -xvf /tmp/m40_tf_csph_3d_48aug_64.tar.gz -C ~/data/m40-so3-64
+
+git clone https://github.com/daniilidis-group/spherical-cnn.git
+cd spherical-cnn
 
 virtualenv -p python3 env
 source env/bin/activate
