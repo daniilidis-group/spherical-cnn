@@ -290,16 +290,11 @@ def sph_conv_batch(f, g,
         hol = harmonics_or_legendre_low
     else:
         hol = harmonics_or_legendre
-    # replace None by -1 so that tf.reshape works
-    shapecfg = [(x if x is not None else -1) for x in tfnp.shape(cfg)]
-    fg = sph_harm_inverse_batch(tfnp.reshape(cfg, (*shapecfg[:4], np.prod(shapecfg[4:]))),
-                                method, hol)
-    shapefg = [(x if x is not None else -1) for x in tfnp.shape(fg)]
-    fg = tfnp.sum(tfnp.reshape(fg,
-                               (*shapefg[:3], *shapecfg[-2:])),
-                  axis=-2)
 
-    return fg
+    # sum over channels
+    cfg = tfnp.sum(cfg, axis=-2)
+
+    return sph_harm_inverse_batch(cfg, method, hol)
 
 
 def is_real_sft(h_or_c):
