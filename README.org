@@ -58,22 +58,20 @@ Namespace(...)
 Loading dataset from from_cached_tfrecords...
 Loading model two_branch. Logdir /tmp/m40-so3
 Start training...
-epoch=1; lr=0.0010 train: 0.2618, valid: 0.2618
-epoch=2; lr=0.0010 train: 0.4958, valid: 0.4958
-epoch=3; lr=0.0010 train: 0.6473, valid: 0.6473
+epoch=1; lr=0.0010 train: 0.2286, valid: 0.2286
+epoch=2; lr=0.0010 train: 0.4335, valid: 0.4335
+epoch=3; lr=0.0010 train: 0.5975, valid: 0.5975
 (...)
-epoch=46; lr=0.0000 train: 0.9657, valid: 0.9657
-epoch=47; lr=0.0000 train: 0.9635, valid: 0.9635
-epoch=48; lr=0.0000 train: 0.9639, valid: 0.9639
+epoch=46; lr=0.0000 train: 0.9630, valid: 0.9630
+epoch=47; lr=0.0000 train: 0.9640, valid: 0.9640
+epoch=48; lr=0.0000 train: 0.9724, valid: 0.9724
 Start testing...
 | model   |  train |    val |   test | train time |
-| m40-so3 | 0.9639 | 0.9639 | 0.8683 |     237.04 |
+| m40-so3 | 0.9724 | 0.9724 | 0.8679 |      88.31 |
 #+END_EXAMPLE
 
 This reproduces the SO(3)/SO(3) result in table 1 (86.9%) of the paper.
-It runs in about 3h on a Nvidia GeForce GTX 1080 Ti, and requires ~10 Gb of GPU memory.
-
-Use =--train_bsize= to reduce the batch size if you have less memory available.
+It runs in about 75min on a Nvidia GeForce GTX 1080 Ti, and requires ~2.2 Gb of GPU memory.
 
 Change =--dset_dir= if you saved the dataset elsewhere.
 
@@ -82,8 +80,8 @@ Call =pytest= to run the unit tests.
 * References
 
 Esteves, C., Allen-Blanchette, C., Makadia, A., & Daniilidis,
-K. (2017). Learning SO(3) Equivariant Representations with Spherical
-CNNs. http://arxiv.org/abs/1711.06721v2
+K. Learning SO(3) Equivariant Representations with Spherical
+CNNs. European Conference on Computer Vision, ECCV 2018 (oral). http://arxiv.org/abs/1711.06721
 
 #+BEGIN_SRC bibtex
 @article{esteves17_learn_so_equiv_repres_with_spher_cnns,
@@ -91,9 +89,9 @@ CNNs. http://arxiv.org/abs/1711.06721v2
   title = {Learning SO(3) Equivariant Representations With Spherical Cnns},
   journal = {CoRR},
   year = {2017},
-  url = {http://arxiv.org/abs/1711.06721v2},
+  url = {http://arxiv.org/abs/1711.06721},
   archivePrefix = {arXiv},
-  eprint = {1711.06721v2},
+  eprint = {1711.06721},
   primaryClass = {cs.CV},
 }
 #+END_SRC
