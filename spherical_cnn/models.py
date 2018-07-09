@@ -369,6 +369,9 @@ def Dataset_train(net, dset, args):
 
                 feed_dict_init['train'] = {dset[1]['x']: x, dset[1]['y']: y}
 
+                # shuffle
+                x, y = util.shuffle_all(x, y)
+
             if args.round_batches:
                 max_loops = len(x) // args.train_bsize
             t0 = time.time()

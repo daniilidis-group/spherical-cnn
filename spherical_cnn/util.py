@@ -122,3 +122,9 @@ class AttrDict(dict):
     def __init__(self, *args, **kwargs):
         super(AttrDict, self).__init__(*args, **kwargs)
         self.__dict__ = self
+
+
+def shuffle_all(*args):
+    """ Do the same random permutation to all inputs. """
+    idx = np.random.permutation(len(args[0]))
+    return [a[idx] for a in args]
