@@ -1,5 +1,7 @@
 #+TITLE: Learning SO(3) Equivariant Representations with Spherical CNNs
 
+[[file:animation.gif]]
+
 * Abstract
 
 We address the problem of 3D rotation equivariance in convolutional
