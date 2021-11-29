@@ -20,9 +20,9 @@ state of the art in standard retrieval and classification benchmarks.
 
 * Demo
 
-  This repository contains a demo, where we train and test the model on the SO(3)-rotated ModelNet40 dataset.
+This repository contains a demo, where we train and test the model on the SO(3)-rotated ModelNet40 dataset.
 
-Check the requirements in requirements.txt
+Check the requirements in requirements.txt. Our codebase has been tested on TensorFlow 1.6 but the dependency is commented out to silence GitHub's security warnings.
 
 Download the dataset [[https://drive.google.com/file/d/1_yJCn0lWkb8gvaHxwTTkGlLVT8dKR0Hc/view?usp=sharing][here]] (7.0Gb).
 
